@@ -7,4 +7,5 @@ interface IChannel {
     boolean userExist(Session session);
     void broadcastMessage(Session session, String message);
     void broadcastServerMessage(String message);
+    boolean canDelete();
 }
