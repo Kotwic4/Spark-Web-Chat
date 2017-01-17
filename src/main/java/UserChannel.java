@@ -10,13 +10,13 @@ class UserChannel extends AbstractChannel{
     @Override
     public void addUser(Session session, User user){
         super.addUser(session,user);
-        this.broadcastServerMessage(user.username + " joined the chat");
+        this.broadcastServerMessage(user.username + " joined the chat " + this.getChannelName());
     }
 
     @Override
     public User removeUser(Session session){
         User user = super.removeUser(session);
-        this.broadcastServerMessage(user.username + " left the chat");
+        this.broadcastServerMessage(user.username + " left the chat " + this.getChannelName());
         return user;
     }
 
@@ -26,8 +26,7 @@ class UserChannel extends AbstractChannel{
         this.broadcastMessage(sender,message);
     }
 
-    @Override
-    public void broadcastServerMessage(String message) {
+    private void broadcastServerMessage(String message) {
         this.broadcastMessage("Server",message);
     }
 

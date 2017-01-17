@@ -6,6 +6,5 @@ interface IChannel {
     User removeUser(Session session);
     boolean userExist(Session session);
     void broadcastMessage(Session session, String message);
-    void broadcastServerMessage(String message);
     boolean canDelete();
 }

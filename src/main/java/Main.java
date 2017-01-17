@@ -12,6 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         channels.put(defaultChannel,new DefaultChannel());
+        channels.put("chatbot",new ChatBotChannel());
         staticFiles.location("/public");
         staticFiles.expireTime(600);
         webSocket("/chat", WebSocketHandler.class);

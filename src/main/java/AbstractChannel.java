@@ -62,4 +62,5 @@ abstract class AbstractChannel implements IChannel{
         return this.usersMap.isEmpty();
     }
 
+
 }

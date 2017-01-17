@@ -1,7 +1,3 @@
-id("log out").addEventListener("click", function () {
-    logOut();
-});
-
 function joinChannel(channelName){
     if(channelName !== ""){
         setCookie("channelName",channelName);
@@ -24,4 +20,12 @@ id("message").addEventListener("keypress", function (e) {
 
 id("send").addEventListener("click", function () {
     joinChannel(id("message").value);
+});
+
+id("log out").addEventListener("click", function () {
+    logOut();
+});
+
+id("updateChannel").addEventListener("click", function () {
+    updateChannelList();
 });
