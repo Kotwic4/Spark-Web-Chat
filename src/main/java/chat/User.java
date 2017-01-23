@@ -1,4 +1,4 @@
-import org.eclipse.jetty.websocket.api.*;
+package chat;
 
 class User {
 

@@ -1,3 +1,5 @@
+package chat;
+
 import com.google.gson.*;
 
 import java.io.BufferedReader;
@@ -8,41 +10,42 @@ import java.util.Date;
 
 class WeatherGetter {
 
-    private final static long weatherDuration = 1000*60*10;
+    private final static long WEATHER_DURATION = 1000*60*10;
 
-    private final static String url = "http://api.openweathermap.org/data/2.5/weather?q=Krakow&appid=ba9e48e5be1545310bcd7406e776e033&units=metric&lang=pl";
+    private final static String URL = "http://api.openweathermap.org/data/2.5/weather?q=Krakow&appid=ba9e48e5be1545310bcd7406e776e033&units=metric&lang=pl";
 
     private String weather;
 
     private Date weatherDate;
 
     WeatherGetter() {
-        getCurrentWeather();
+        this.getCurrentWeather();
     }
 
     String getWeather(){
-        if(new Date().getTime() - weatherDate.getTime() > weatherDuration){
-            getCurrentWeather();
+        if(new Date().getTime() - this.weatherDate.getTime() > WEATHER_DURATION){
+            this.getCurrentWeather();
         }
-        return weather;
+        return this.weather;
     }
 
     private void getCurrentWeather() {
         try {
-            JsonObject page = getJsonFromUrl(url);
+            JsonObject page = this.getJsonFromUrl(URL);
             int temp = page.get("main").getAsJsonObject()
                     .get("temp").getAsInt();
             String description = page.get("weather").getAsJsonArray()
                     .get(0).getAsJsonObject()
                     .get("description").getAsString();
-            weather = "Pogoda w Krakowie \n" +
+            this.weather = "Pogoda w Krakowie \n" +
                     "Temperatura : " + temp + "\u00b0C\n" +
                     "Opis : " + description;
         } catch (Exception e) {
             e.printStackTrace();
-            weather = "Error with getting weather information";
+            this.weather = "Error with getting weather information";
         }
-        weatherDate = new Date();
+        this.weatherDate = new Date();
+
     }
     private JsonObject getJsonFromUrl(String urlString) throws IOException {
         BufferedReader reader = null;

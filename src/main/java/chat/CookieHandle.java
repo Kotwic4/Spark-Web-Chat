@@ -1,13 +1,15 @@
+package chat;
+
 import java.net.HttpCookie;
 import java.util.List;
 
 class CookieHandle {
 
     String getUsername(List<HttpCookie> cookies){
-        return getValue(cookies,"username");
+        return this.getValue(cookies,"username");
     }
 
-    String getChannelName(List<HttpCookie> cookies) {return  getValue(cookies,"channelName");}
+    String getChannelName(List<HttpCookie> cookies) {return  this.getValue(cookies,"channelName");}
 
     String getValue(List<HttpCookie> cookies, String name){
         for(HttpCookie cookie : cookies){

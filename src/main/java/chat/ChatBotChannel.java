@@ -1,3 +1,5 @@
+package chat;
+
 import org.eclipse.jetty.websocket.api.Session;
 import org.json.JSONObject;
 
@@ -16,15 +18,15 @@ class ChatBotChannel extends AbstractChannel{
 
     @Override
     public void broadcastMessage(Session session, String message) {
-        User user = findUser(session);
-        broadcastMessage(user.username,session,message);
-        broadcastBotMessege(session, chatbotAnswer(message));
+        User user = this.findUser(session);
+        this.broadcastMessage(user.username,session,message);
+        this.broadcastBotMessege(session, chatbotAnswer(message));
     }
 
     @Override
     public void addUser(Session session, User user) {
         super.addUser(session, user);
-        broadcastBotMessege(session, chatbotAnswer("Hi"));
+        this.broadcastBotMessege(session, this.chatbotAnswer("Hi"));
     }
 
     private String chatbotAnswer(String message){
@@ -33,11 +35,11 @@ class ChatBotChannel extends AbstractChannel{
             case "hi":
                 return "Hi :)";
             case "Która godzina?":
-                return getHour();
+                return this.getHour();
             case "Jaki dziś dzień tygodnia?":
-                return getDay();
+                return this.getDay();
             case "Jaka jest pogoda w Krakowie?":
-                return weatherGetter.getWeather();
+                return this.weatherGetter.getWeather();
             case "Help":
             case "help":
                 return "Available options :\n" +
@@ -65,8 +67,7 @@ class ChatBotChannel extends AbstractChannel{
     }
 
     private void broadcastBotMessege(Session session, String message){
-
-        broadcastMessage(this.getChannelName(),session,message);
+        this.broadcastMessage(this.getChannelName(),session,message);
     }
 
     @Override
@@ -75,7 +76,7 @@ class ChatBotChannel extends AbstractChannel{
     }
 
     private void broadcastMessage(String sender,Session session,String message){
-        User user = findUser(session);
+        User user = this.findUser(session);
         try {
             session.getRemote().sendString(String.valueOf(new JSONObject()
                     .put("userMessage", this.createHtmlMessageFromSender(sender, message))

@@ -1,8 +1,11 @@
+package chat;
 
 class DefaultChannel extends UserChannel{
+
     DefaultChannel() {
-        super(Main.defaultChannel);
+        super(Chat.defaultChannel);
     }
+
     @Override
     public boolean canDelete() {
         return false;
